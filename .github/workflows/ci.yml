@@ -34,4 +34,10 @@ jobs:
         run: poetry run task lint
 
       - name: Test
-        run: poetry run task test
+        run: poetry run pytest --cov=billups_challenge --cov-report=xml tests/
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v4
+        with:
+          files: coverage.xml
+          fail_ci_if_error: false

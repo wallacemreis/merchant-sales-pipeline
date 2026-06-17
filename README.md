@@ -1,6 +1,6 @@
 # Billups Data Engineering Challenge
 
-[![CI](https://github.com/wmreis/billups-challenge/actions/workflows/ci.yml/badge.svg)](https://github.com/wmreis/billups-challenge/actions/workflows/ci.yml)
+[![CI](https://github.com/wallacemreis/merchant-sales-pipeline/actions/workflows/ci.yml/badge.svg)](https://github.com/wallacemreis/merchant-sales-pipeline/actions/workflows/ci.yml)
 
 PySpark solution for the Billups Sr Data Engineer technical challenge. Processes historical transaction and merchant datasets to answer 5 analytical questions about merchant sales patterns.
 

@@ -1,0 +1,15 @@
+services:
+  app:
+    build: .
+    volumes:
+      - ./data:/app/data:ro
+      - ./output:/app/output
+    environment:
+      - BILLUPS_DATA_DIR=/app/data
+    command: python -m billups_challenge.main
+
+  test:
+    build: .
+    command: pytest tests/ -v --cov=billups_challenge --cov-report=term-missing
+    profiles:
+      - test

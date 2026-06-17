@@ -1,0 +1,54 @@
+[tool.poetry]
+name = "billups-challenge"
+version = "1.0.0"
+description = "Billups Sr Data Engineer - Technical Challenge"
+authors = ["Wallace Reis <wallace.mreis@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = ">=3.12,<3.14"
+pyspark = "3.5.3"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.2.2"
+pytest-cov = "^5.0.0"
+coverage = {extras = ["toml"], version = "^7.5.0"}
+ruff = "^0.11.0"
+taskipy = "^1.13.0"
+hypothesis = "^6.100.0"
+jupyter = "^1.0.0"
+
+[tool.taskipy.tasks]
+test = "pytest tests/ -v --cov=billups_challenge --cov-report=term-missing --cov-report=html:htmlcov --cov-fail-under=80"
+lint = "ruff check billups_challenge tests && ruff format --check billups_challenge tests"
+fmt = "ruff format billups_challenge tests && ruff check --fix billups_challenge tests"
+run = "python -m billups_challenge.main"
+docker-build = "docker compose build"
+docker-test = "docker compose --profile test run --rm test"
+docker-run = "docker compose up app"
+docker-clean = "docker system prune -af && docker volume prune -af"
+
+[tool.ruff]
+line-length = 120
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "W", "UP"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["billups_challenge"]
+
+[tool.coverage.run]
+source = ["billups_challenge"]
+omit = ["tests/*", "billups_challenge/main.py", "billups_challenge/session.py", "billups_challenge/config.py", "billups_challenge/report.py"]
+
+[tool.coverage.report]
+fail_under = 80
+show_missing = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-p no:warnings"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.masonry.api"
